@@ -1,12 +1,14 @@
 import { useMemo, useState } from 'react'
 import styles from './DynamicForm.module.css'
 import { NormalizedSection } from '@/types/categoryField'
+import { Translations } from '@/i18n/types'
 
 type Props = {
   sections: NormalizedSection[]
+  t: Translations
 }
 
-export function DynamicForm({ sections }: Props) {
+export function DynamicForm({ sections, t }: Props) {
   const [values, setValues] = useState<Record<string, unknown>>({})
 
   const requiredKeys = useMemo(() => {
@@ -19,11 +21,15 @@ export function DynamicForm({ sections }: Props) {
     setValues((prev) => ({ ...prev, [key]: v }))
   }
 
+  const filledRequired = requiredKeys.filter(
+    (k) => values[k] !== undefined && values[k] !== '' && values[k] !== false
+  ).length
+
   return (
     <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
       {sections.map((sec) => (
         <div key={sec.title} className={styles.section}>
-          <h3 className={styles.sectionTitle}>{sec.title}</h3>
+          <h3 className={styles.sectionTitle}>{sec.title || t.form.details}</h3>
 
           <div className={styles.grid}>
             {sec.fields.map((f) => {
@@ -68,7 +74,7 @@ export function DynamicForm({ sections }: Props) {
                         }
                       }}
                     >
-                      {f.control === 'select' ? <option value="">Select…</option> : null}
+                      {f.control === 'select' ? <option value="">{t.form.selectPlaceholder}</option> : null}
                       {(f.choices ?? []).map((c) => (
                         <option key={c.value} value={c.value}>
                           {c.label}
@@ -105,7 +111,9 @@ export function DynamicForm({ sections }: Props) {
                     type={f.control === 'number' ? 'number' : 'text'}
                     placeholder={f.placeholder}
                     value={typeof val === 'string' || typeof val === 'number' ? String(val) : ''}
-                    onChange={(e) => setValue(f.key, f.control === 'number' ? Number(e.target.value) : e.target.value)}
+                    onChange={(e) =>
+                      setValue(f.key, f.control === 'number' ? Number(e.target.value) : e.target.value)
+                    }
                   />
                 </label>
               )
@@ -114,14 +122,9 @@ export function DynamicForm({ sections }: Props) {
         </div>
       ))}
 
-      {/* Submission isn't required, but user must be able to fill the form.  */}
+      <p className={styles.note}>{t.form.dynamicNote}</p>
       <p className={styles.note}>
-        Form is dynamic and fillable; submission is not required for this assessment.
-      </p>
-
-      {/* Simple completeness signal (optional UX, no extra business rules) */}
-      <p className={styles.note}>
-        Required filled: {requiredKeys.filter((k) => values[k] !== undefined && values[k] !== '' && values[k] !== false).length}/{requiredKeys.length}
+        {t.form.requiredFilled}: {filledRequired}/{requiredKeys.length}
       </p>
     </form>
   )

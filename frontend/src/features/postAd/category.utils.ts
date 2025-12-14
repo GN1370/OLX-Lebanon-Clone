@@ -4,21 +4,42 @@ function isObject(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null
 }
 
-export function parseCategories(raw: any): CategoryNode[] {
-  const list = Array.isArray(raw) ? raw : raw?.data ?? raw?.categories ?? []
-  if (!Array.isArray(list)) return []
+function isArray(v: unknown): v is unknown[] {
+  return Array.isArray(v)
+}
 
-  const mapNode = (c: any): CategoryNode | null => {
-    const name = String(c?.name ?? c?.title ?? '')
-    const slug = String(c?.slug ?? c?.categorySlug ?? '')
+function readString(v: unknown): string {
+  return typeof v === 'string' ? v : ''
+}
+
+function getArray(obj: Record<string, unknown>, keys: string[]): unknown[] {
+  for (const k of keys) {
+    const v = obj[k]
+    if (isArray(v)) return v
+  }
+  return []
+}
+
+export function parseCategories(raw: unknown): CategoryNode[] {
+  const list: unknown[] =
+    isArray(raw) ? raw :
+    isObject(raw) ? (
+      isArray(raw.data) ? raw.data :
+      isArray(raw.categories) ? raw.categories :
+      []
+    ) : []
+
+  const mapNode = (c: unknown): CategoryNode | null => {
+    if (!isObject(c)) return null
+
+    const name = readString(c.name) || readString(c.title)
+    const slug = readString(c.slug) || readString(c.categorySlug)
     if (!name || !slug) return null
 
-    const childrenRaw = c?.children ?? c?.subcategories ?? c?.items
-    const children = Array.isArray(childrenRaw)
-      ? (childrenRaw.map(mapNode).filter(Boolean) as CategoryNode[])
-      : undefined
+    const childrenRaw = getArray(c, ['children', 'subcategories', 'items'])
+    const children = childrenRaw.map(mapNode).filter(Boolean) as CategoryNode[]
 
-    return { name, slug, children: children?.length ? children : undefined }
+    return { name, slug, children: children.length ? children : undefined }
   }
 
   return list.map(mapNode).filter(Boolean) as CategoryNode[]

@@ -4,19 +4,19 @@ import { CategoryNode } from './category.types'
 import { findNodeBySlug, findPathBySlug, toOptions } from './category.utils'
 import { Select } from '@/components/Select/Select'
 import { Button } from '@/components/Button/Button'
+import { dictionaries, Lang } from '@/i18n'
+
+type T = (typeof dictionaries)['en']
 
 type Props = {
   categories: CategoryNode[]
   value: string
   onChange: (slug: string) => void
+  lang: Lang
+  t: T
 }
 
-const REQUIRED_SUGGESTIONS = [
-  { slug: 'properties-for-sale', label: 'Properties for Sale' },
-  { slug: 'cars-for-sale', label: 'Cars for Sale' },
-] as const
-
-export function CategoryPicker({ categories, value, onChange }: Props) {
+export function CategoryPicker({ categories, value, onChange , t}: Props) {
   const [parentSlug, setParentSlug] = useState('')
   const [childSlug, setChildSlug] = useState('')
 
@@ -60,10 +60,15 @@ export function CategoryPicker({ categories, value, onChange }: Props) {
     return path.map((p) => p.name).join(' / ')
   }, [categories, value])
 
+   const REQUIRED_SUGGESTIONS = [
+    { slug: 'properties-for-sale', label: t.postAd.propertiesForSale },
+    { slug: 'cars-for-sale', label: t.postAd.carsForSale },
+  ] as const
+
   return (
     <div className={styles.wrap}>
       <div className={styles.suggestions}>
-        <span className={styles.suggestLabel}>Required categories (quick select):</span>
+        <span className={styles.suggestLabel}>{t.postAd.requiredQuickSelect}</span>
         <div className={styles.suggestButtons}>
           {REQUIRED_SUGGESTIONS.map((s) => (
             <Button key={s.slug} type="button" variant="secondary" onClick={() => onChange(s.slug)}>
@@ -75,22 +80,23 @@ export function CategoryPicker({ categories, value, onChange }: Props) {
 
       <div className={styles.grid}>
         <Select
-          label="Main category"
-          value={parentSlug}
-          options={topOptions}
-          onChange={(slug) => {
+        label={t.postAd.mainCategory}
+        value={parentSlug}
+        options={topOptions}
+        placeholder={t.common.select}
+        onChange={(slug) => {
             setParentSlug(slug)
             setChildSlug('')
-          }}
+        }}
         />
 
         <Select
-          label="Sub category (optional)"
-          value={childSlug}
-          options={childOptions}
-          placeholder={selectedParent?.children?.length ? 'Select…' : 'No subcategories'}
-          disabled={!selectedParent?.children?.length}
-          onChange={(slug) => setChildSlug(slug)}
+        label={t.postAd.subCategory}
+        value={childSlug}
+        options={childOptions}
+        placeholder={selectedParent?.children?.length ? t.common.select : t.postAd.noSubcategories}
+        disabled={!selectedParent?.children?.length}
+        onChange={(slug) => setChildSlug(slug)}
         />
       </div>
 
