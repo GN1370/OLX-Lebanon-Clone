@@ -1,0 +1,129 @@
+/* Converted all hex colors to RGB */
+.header {
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(224, 224, 224);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoSvg {
+  width: 64px;
+  height: 32px;
+}
+
+.logoText {
+  font-size: 28px;
+  font-weight: 800;
+  fill: rgb(0, 47, 52);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navLink {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgb(0, 47, 52);
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: rgb(35, 229, 219);
+}
+
+/* Desktop-only Post Ad text link */
+.navLinkDesktop {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgb(0, 47, 52);
+  transition: color 0.2s;
+  display: none;
+}
+
+.navLinkDesktop:hover {
+  color: rgb(35, 229, 219);
+}
+
+/* Mobile icon button - hidden on desktop */
+.mobileButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 47, 52);
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.mobileButton:hover {
+  background-color: rgb(0, 71, 79);
+}
+
+.postAdButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgb(0, 47, 52);
+  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.postAdButton:hover {
+  background-color: rgb(0, 71, 79);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+    height: 56px;
+  }
+
+  /* Hide desktop nav elements on mobile */
+  .navLink {
+    display: none;
+  }
+
+  .navLinkDesktop {
+    display: none;
+  }
+
+  .postAdButton {
+    display: flex;
+    padding: 10px;
+    border-radius: 50%;
+  }
+
+  .postAdButton span {
+    display: none;
+  }
+
+  /* Mobile button styles no longer needed */
+  .mobileButton {
+    display: none;
+  }
+}
