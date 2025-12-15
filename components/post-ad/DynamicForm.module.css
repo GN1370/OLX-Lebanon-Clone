@@ -1,0 +1,265 @@
+.container {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #002f34;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: #7f7f7f;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #002f34;
+}
+
+.required {
+  color: #e74c3c;
+  margin-left: 4px;
+}
+
+.input,
+.select,
+.textarea {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #002f34;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #23e5db;
+  box-shadow: 0 0 0 3px rgba(35, 229, 219, 0.1);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #b0b0b0;
+}
+
+.inputError {
+  border-color: #e74c3c;
+}
+
+.inputError:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237f7f7f' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: #002f34;
+}
+
+.radioInput {
+  display: none;
+}
+
+.radioCustom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.radioInput:checked + .radioCustom {
+  border-color: #23e5db;
+}
+
+.radioInput:checked + .radioCustom::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #23e5db;
+  border-radius: 50%;
+}
+
+.errorMessage {
+  font-size: 0.8125rem;
+  color: #e74c3c;
+}
+
+.imageUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.uploadArea:hover {
+  border-color: #23e5db;
+  background-color: #f0fffe;
+}
+
+.uploadArea svg {
+  color: #7f7f7f;
+  margin-bottom: 12px;
+}
+
+.uploadArea p {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #002f34;
+  margin-bottom: 4px;
+}
+
+.uploadArea span {
+  font-size: 0.8125rem;
+  color: #7f7f7f;
+}
+
+.submitButton {
+  padding: 14px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #002f34;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  margin-top: 16px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #00474f;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  gap: 16px;
+  color: #7f7f7f;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #23e5db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+  }
+
+  .form {
+    gap: 20px;
+  }
+
+  .input,
+  .select,
+  .textarea {
+    padding: 10px 14px;
+    font-size: 0.9375rem;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .uploadArea {
+    padding: 24px;
+  }
+}
