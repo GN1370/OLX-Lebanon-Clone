@@ -1,0 +1,64 @@
+/* Converted all hex colors to RGB */
+.main {
+  min-height: calc(100vh - 140px);
+}
+
+.hero {
+  background: linear-gradient(135deg, rgb(0, 47, 52) 0%, rgb(0, 71, 79) 100%);
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  color: rgb(255, 255, 255);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.heroSubtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.125rem;
+}
+
+.categoriesSection {
+  padding: 40px 0;
+  background-color: rgb(255, 255, 255);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(0, 47, 52);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 1.75rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .categoriesSection {
+    padding: 24px 0;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+}

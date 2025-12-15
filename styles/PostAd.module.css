@@ -1,0 +1,128 @@
+/* Converted all hex colors to RGB */
+.main {
+  min-height: calc(100vh - 140px);
+  padding: 32px 0;
+  background-color: rgb(245, 245, 245);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepNumber {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: rgb(224, 224, 224);
+  color: rgb(127, 127, 127);
+  transition: all 0.2s;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  color: rgb(127, 127, 127);
+  transition: color 0.2s;
+}
+
+.progressStep.active .stepNumber {
+  background-color: rgb(0, 47, 52);
+  color: rgb(255, 255, 255);
+}
+
+.progressStep.active .stepLabel {
+  color: rgb(0, 47, 52);
+  font-weight: 500;
+}
+
+.progressStep.completed .stepNumber {
+  background-color: rgb(35, 229, 219);
+  color: rgb(0, 47, 52);
+}
+
+.progressStep.completed .stepLabel {
+  color: rgb(0, 47, 52);
+}
+
+.progressLine {
+  width: 80px;
+  height: 2px;
+  background-color: rgb(224, 224, 224);
+  margin: 0 16px;
+  margin-bottom: 24px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-size: 0.9375rem;
+  color: rgb(0, 47, 52);
+  margin-bottom: 24px;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.backButton:hover {
+  color: rgb(35, 229, 219);
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 16px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .progress {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+  }
+
+  .progressLine {
+    width: 40px;
+    margin: 0 8px;
+    margin-bottom: 24px;
+  }
+
+  .stepLabel {
+    font-size: 0.625rem;
+  }
+}
